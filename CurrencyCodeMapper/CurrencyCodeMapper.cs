@@ -25,7 +25,7 @@ public class CurrencyCodeMapper : ICurrencyCodeMapper
         var polishSlotyRegions = regions.Where(r => r.ISOCurrencySymbol == "PLN");
         var russianRegions = regions.Where(r => r.ISOCurrencySymbol == "RUB");
 
-        foreach (var region in regions)
+        foreach (var region in regions) 
         {
             if (!_symbolsByCurrencyCode.ContainsKey(region.ISOCurrencySymbol))
             {

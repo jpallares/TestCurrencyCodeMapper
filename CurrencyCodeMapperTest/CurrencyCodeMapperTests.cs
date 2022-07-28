@@ -1,14 +1,12 @@
-using Xunit;
-
-namespace CurrencyCodeMapper;
+namespace CurrencyCodeMapperTest;
 
 public class CurrencyCodeMapperTests
 {
-    private CurrencyCodeMapper currencyCodeMapper;
+    private CurrencyCodeMapper.CurrencyCodeMapper currencyCodeMapper;
 
     public CurrencyCodeMapperTests()
     {
-        currencyCodeMapper = new CurrencyCodeMapper();
+        currencyCodeMapper = new CurrencyCodeMapper.CurrencyCodeMapper();
     }
 
     [Theory]
