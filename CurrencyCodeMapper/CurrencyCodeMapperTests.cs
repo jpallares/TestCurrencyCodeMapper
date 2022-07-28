@@ -1,34 +1,33 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace CurrencyCodeMapper;
 
-[TestFixture]
 public class CurrencyCodeMapperTests
 {
     private CurrencyCodeMapper currencyCodeMapper;
 
-    [SetUp]
-    public void Setup()
+    public CurrencyCodeMapperTests()
     {
         currencyCodeMapper = new CurrencyCodeMapper();
     }
 
-    [TestCase("AUD", "$")]
-    [TestCase("CAD", "$")]
-    [TestCase("GBP", "£")]
-    [TestCase("EUR", "€")]
-    [TestCase("USD", "$")]
-    [TestCase("BRL", "R$")]
-    [TestCase("DKK", "kr.")]
-    [TestCase("SEK", "kr")]
-    [TestCase("NOK", "kr")]
-    [TestCase("JPY", "¥")]
-    [TestCase("CNY", "¥")]
-    [TestCase("PLN", "zł")]
-    [TestCase("RUB", "₽")]
+    [Theory]
+    [InlineData("AUD", "$")]
+    [InlineData("CAD", "$")]
+    [InlineData("GBP", "£")]
+    [InlineData("EUR", "€")]
+    [InlineData("USD", "$")]
+    [InlineData("BRL", "R$")]
+    [InlineData("DKK", "kr.")]
+    [InlineData("SEK", "kr")]
+    [InlineData("NOK", "kr")]
+    [InlineData("JPY", "¥")]
+    [InlineData("CNY", "¥")]
+    [InlineData("PLN", "zł")]
+    [InlineData("RUB", "₽")]
     public void GetSymbol_ShouldReturnExpectedSymbol_ForSpecifiedLanguage(string currencyCode, string expectedSymbol)
     {
         var result = currencyCodeMapper.GetSymbol(currencyCode);
-        Assert.AreEqual(expectedSymbol, result);
+        Assert.Equal(expectedSymbol, result);
     }
 }
