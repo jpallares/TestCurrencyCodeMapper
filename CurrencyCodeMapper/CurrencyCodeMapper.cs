@@ -1,36 +1,37 @@
 ﻿using System.Globalization;
 
-namespace CurrencyCodeMapper;
-
-public interface ICurrencyCodeMapper
+namespace CurrencyCodeMapper
 {
-    string GetSymbol(string currencyCode);
-}
-
-public class CurrencyCodeMapper : ICurrencyCodeMapper
-{
-    public string GetSymbol(string currencyCode) => _symbolsByCurrencyCode[currencyCode];
-
-    private readonly Dictionary<string, string> _symbolsByCurrencyCode;
-
-    public CurrencyCodeMapper()
+    public interface ICurrencyCodeMapper
     {
-        _symbolsByCurrencyCode = new Dictionary<string, string>();
+        string GetSymbol(string currencyCode);
+    }
 
-        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-                      .Select(cultureInfo => new RegionInfo(cultureInfo.Name));
+    public class CurrencyCodeMapper : ICurrencyCodeMapper
+    {
+        public string GetSymbol(string currencyCode) => _symbolsByCurrencyCode[currencyCode];
 
-        var NOKregions = regions.Where(r => r.ISOCurrencySymbol == "NOK");
-        var japaneseYenRegions = regions.Where(r => r.ISOCurrencySymbol == "JPY");
-        var polishSlotyRegions = regions.Where(r => r.ISOCurrencySymbol == "PLN");
-        var russianRegions = regions.Where(r => r.ISOCurrencySymbol == "RUB");
+        private readonly Dictionary<string, string> _symbolsByCurrencyCode;
 
-        foreach (var region in regions) 
+        public CurrencyCodeMapper()
         {
-            if (!_symbolsByCurrencyCode.ContainsKey(region.ISOCurrencySymbol))
+            _symbolsByCurrencyCode = new Dictionary<string, string>();
+
+            var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
+                .Select(cultureInfo => new RegionInfo(cultureInfo.Name));
+
+            var NOKregions = regions.Where(r => r.ISOCurrencySymbol == "NOK");
+            var japaneseYenRegions = regions.Where(r => r.ISOCurrencySymbol == "JPY");
+            var polishSlotyRegions = regions.Where(r => r.ISOCurrencySymbol == "PLN");
+            var russianRegions = regions.Where(r => r.ISOCurrencySymbol == "RUB");
+
+            foreach (var region in regions)
             {
-                _symbolsByCurrencyCode.Add(region.ISOCurrencySymbol, region.CurrencySymbol);
+                if (!_symbolsByCurrencyCode.ContainsKey(region.ISOCurrencySymbol))
+                {
+                    _symbolsByCurrencyCode.Add(region.ISOCurrencySymbol, region.CurrencySymbol);
+                }
             }
-        }   
+        }
     }
 }

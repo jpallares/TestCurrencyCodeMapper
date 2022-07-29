@@ -1,31 +1,35 @@
-namespace CurrencyCodeMapperTest;
+using Xunit;
 
-public class CurrencyCodeMapperTests
+namespace CurrencyCodeMapperTest
 {
-    private CurrencyCodeMapper.CurrencyCodeMapper currencyCodeMapper;
-
-    public CurrencyCodeMapperTests()
+    public class CurrencyCodeMapperTests
     {
-        currencyCodeMapper = new CurrencyCodeMapper.CurrencyCodeMapper();
-    }
+        private CurrencyCodeMapper.CurrencyCodeMapper currencyCodeMapper;
 
-    [Theory]
-    [InlineData("AUD", "$")]
-    [InlineData("CAD", "$")]
-    [InlineData("GBP", "£")]
-    [InlineData("EUR", "€")]
-    [InlineData("USD", "$")]
-    [InlineData("BRL", "R$")]
-    [InlineData("DKK", "kr.")]
-    [InlineData("SEK", "kr")]
-    [InlineData("NOK", "kr")]
-    [InlineData("JPY", "¥")]
-    [InlineData("CNY", "¥")]
-    [InlineData("PLN", "zł")]
-    [InlineData("RUB", "₽")]
-    public void GetSymbol_ShouldReturnExpectedSymbol_ForSpecifiedLanguage(string currencyCode, string expectedSymbol)
-    {
-        var result = currencyCodeMapper.GetSymbol(currencyCode);
-        Assert.Equal(expectedSymbol, result);
+        public CurrencyCodeMapperTests()
+        {
+            currencyCodeMapper = new CurrencyCodeMapper.CurrencyCodeMapper();
+        }
+
+        [Theory]
+        [InlineData("AUD", "$")]
+        [InlineData("CAD", "$")]
+        [InlineData("GBP", "£")]
+        [InlineData("EUR", "€")]
+        [InlineData("USD", "$")]
+        [InlineData("BRL", "R$")]
+        [InlineData("DKK", "kr.")]
+        [InlineData("SEK", "kr")]
+        [InlineData("NOK", "kr")]
+        [InlineData("JPY", "¥")]
+        [InlineData("CNY", "¥")]
+        [InlineData("PLN", "zł")]
+        [InlineData("RUB", "₽")]
+        public void GetSymbol_ShouldReturnExpectedSymbol_ForSpecifiedLanguage(string currencyCode,
+            string expectedSymbol)
+        {
+            var result = currencyCodeMapper.GetSymbol(currencyCode);
+            Assert.Equal(expectedSymbol, result);
+        }
     }
 }
